@@ -28,6 +28,8 @@ export const AddCategory = ({setCategories}) => {
                     type="text"
                     onChange={handleInputChange}
                     value={inputValue}
+                    className="mt-5 rounded-xl bg-gray-100 focus:outline-none focus:border-2 focs:border-gray-200 py-2 px-5"
+                    placeholder="Digite el nombre del gif a buscar"
                 />
         </form>
     );
