@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en GifExpert Debe de mostrar el render del componente GifGridItem 1`] = `
+<div
+  className="bg-white drop-shadow-xl flex flex-col justify-between card animate__animated animate__fadeIn animate__delay-2s"
+>
+  <img
+    alt="Title X"
+    className="object-cover"
+    src="http://localhost:3000/imagen.jpg"
+  />
+  <h3
+    className="text-center capitalize p-5 text-md"
+  >
+    Title X
+  </h3>
+  <p
+    className="text-center bg-blue-500 text-white text-lg hover:bg-blue-600"
+  >
+    <a
+      href="http://localhost:3000/imagen.jpg"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Ver Gif
+    </a>
+  </p>
+</div>
+`;
