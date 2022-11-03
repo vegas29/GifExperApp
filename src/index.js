@@ -5,7 +5,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  
   <GifExpertApp />,
   document.getElementById('root')
 );
