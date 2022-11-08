@@ -2,26 +2,26 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { useFetchGifs } from "../../hooks/useFetchGifs";
 
 describe('Pruebas en el hook useFetchGifs', ()=>{
-    // test('Debe de regresar el estado inicial', () => {
+    test('Debe de regresar el estado inicial', () => {
 
-    //     const { result } = renderHook( () => useFetchGifs('Shingeki'));
-    //     const { images, isLoading } = result.current;
+        const { result } = renderHook( () => useFetchGifs('Shingeki'));
+        const { images, isLoading } = result.current;
 
-    //     expect( images.length ).toBe(0);
-    //     expect( isLoading ).toBeTruthy();
+        expect( images.length ).toBe(0);
+        expect( isLoading ).toBeTruthy();
 
-    // });
+    });
 
-    // test('Debe de retornar un arreglo de imagenes y isLoading en false', async() => {
-    //     const { result } = renderHook( () => useFetchGifs('Shingeki'));
+    test('Debe de retornar un arreglo de imagenes y isLoading en false', async() => {
+        const { result } = renderHook( () => useFetchGifs('Shingeki'));
 
-    //     await waitFor(
-    //         () => expect( result.current.images.length ).toBeGreaterThan(0)
-    //     );
+        await waitFor(
+            () => expect( result.current.images.length ).toBeGreaterThan(0)
+        );
 
-    //     const { images, isLoading } = result.current;
+        const { images, isLoading } = result.current;
 
-    //     expect( images.length ).toBeGreaterThan(0);
-    //     expect( isLoading ).toBeFalsy();
-    // });
+        expect( images.length ).toBeGreaterThan(0);
+        expect( isLoading ).toBeFalsy();
+    });
 });

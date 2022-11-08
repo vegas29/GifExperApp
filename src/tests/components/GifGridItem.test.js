@@ -27,6 +27,6 @@ describe('Pruebas en GifGridItem',()=>{
     test('Debe de mostrar el titulo en el componente', () => {
         render(<GifGridItem title={ title } url={ url } />);
 
-        expect( screen.getByText() ).toBeTruthy();
+        expect( screen.getByText(title) ).toBeTruthy();
     });
 });

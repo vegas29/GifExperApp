@@ -1,25 +1,24 @@
 import { useState, useEffect } from "react";
 import { getGifs } from "../helpers/getGifs";
 
-export const useFetchGifs = (category)=>{
-    const [state, setState] = useState({
-        data: [],
-        loading:true
-    });
+export const useFetchGifs = ( category ) => {
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); 
 
-    useEffect(()=>{
-        getGifs(category)
-            .then(imgs =>{
+    const getImages = async () => {
+        const newImages = await getGifs( category );
+        setImages(newImages);
+        setIsLoading(false);
+    }
 
-                setState({
-                    data:imgs,
-                    loading: false
-                })
-                
-            })
-    }, [category]);
+    useEffect( () => {
+        getImages();
+    }, []);
 
    
 
-    return state;
+    return {
+        images, 
+        isLoading
+    }
 }

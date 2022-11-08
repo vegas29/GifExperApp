@@ -10,12 +10,18 @@ describe('Probando el componente GifGrid', () => {
 
     const category = 'Eren';
 
-    // test('Debe de mostrar el loading inicialmente', () => {
-    //     render( <GifGrid category={ category } />);
-    //     expect( screen.getByText('Cargando...'));
-    //     expect( screen.getByText( category ));
-    //     // screen.debug();
-    // });
+    test('Debe de mostrar el loading inicialmente', () => {
+
+        useFetchGifs.mockReturnValue({
+            images: [],
+            isLoading: true
+        });
+
+        render( <GifGrid category={ category } />);
+        expect( screen.getByText('Cargando...'));
+        expect( screen.getByText( category ));
+        // screen.debug();
+    });
 
     test('Debe de mostrar items cuando se cargan las imgs mediante useFetchGifs', () => {
 
@@ -33,11 +39,12 @@ describe('Probando el componente GifGrid', () => {
         ]
 
         useFetchGifs.mockReturnValue({
-            images: [],
-            isLOading: false
+            images: gifs,
+            isLoading: false
         });
 
         render( <GifGrid category={ category } />);
+        screen.debug();
         expect( screen.getAllByRole('img').length).toBe(2);
     });
 });
