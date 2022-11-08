@@ -1,19 +1,19 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import GifExpertApp from '../GifExpertApp';
+/* eslint-disable testing-library/no-debugging-utils */
+import { render, screen } from "@testing-library/react";
+import GifExpertApp from "../GifExpertApp";
 
-describe('Prueba sobre el componente <GifExpertApp />', ()=>{
-    test('Debe renderizar el componente', ()=>{
-        const wrapper = shallow(<GifExpertApp/>);
+describe('Prueba sobre el componente <GifExpertApp />', () => {
+    test('Deberia coincidir el snapshot', () => {
+        const { container} = render( <GifExpertApp/> );
+        expect( container ).toMatchSnapshot();
 
-        expect(wrapper).toMatchSnapshot();
-    })
+        screen.debug();
+    });
 
-    test('Debe de mostrar una lista de categorias', ()=>{
-        const categories = ['One Punch', 'SNK'];
-        const wrapper = shallow(<GifExpertApp defaultCategories={categories}/>);
-
-        expect(wrapper).toMatchSnapshot();
-        expect(wrapper.find('GifGrid').length).toBe(categories.length);
-    })
-})
+    test('Debe contener el texto GifExpertApp', () => {
+        render( <GifExpertApp/> );
+        
+        const h1 = screen.getByRole('heading', { level: 1 });
+        expect( h1 ).toBeTruthy();
+    });
+});

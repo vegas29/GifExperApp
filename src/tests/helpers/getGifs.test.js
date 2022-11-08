@@ -1,15 +1,14 @@
 import { getGifs } from "../../helpers/getGifs"
 
 describe('Pruebas con getGif Fetch', ()=>{
-    test('Debe traer 20 elementos', async()=>{
+    test('Debe de retornar un arreglo de gifs', async()=>{
         const gifs = await getGifs('One Punch');
 
-        expect(gifs.length).toBe(20);
-    })
-
-    test('Debe ser un arreglo vacio', async()=>{
-        const gifs = await getGifs('');
-
-        expect(gifs.length).toBe(0);
-    })
+        expect( gifs.length ).toBeGreaterThan( 0 );
+        expect( gifs[0] ).toEqual({
+            id: expect.any( String ),
+            title: expect.any( String ),
+            url: expect.any( String )
+        });
+    });
 })

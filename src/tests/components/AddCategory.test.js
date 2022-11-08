@@ -1,46 +1,45 @@
-import react from 'react';
-import {shallow} from 'enzyme';
-import AddCategory from '../../components/AddCategory';
+/* eslint-disable testing-library/no-debugging-utils */
+import { fireEvent, render, screen } from "@testing-library/react";
+import { AddCategory } from "../../components/AddCategory";
 
 describe('Pruebas en el componente AddCategory', ()=>{
+    test('Debe de cambiar el valor de la caja de texto', () => {
+        render( <AddCategory setCategories={ () => {}}/> );
+        const input = screen.getByRole('textbox');
 
-    const setCategories = jest.fn();
-    let wrapper = shallow(<AddCategory setCategories={setCategories}/>);
-
-    beforeEach(()=>{
-        jest.clearAllMocks();
-        wrapper = shallow(<AddCategory setCategories={setCategories}/>);
+        fireEvent.input( input, { target: { value: 'Eren' } } );
+        expect( input.value ).toBe('Eren');
+        // screen.debug();
     });
-    test('Debe de mostrarse correctamente', ()=>{
-        expect(wrapper).toMatchSnapshot();
-    })
 
-    test('Debe de cambiar la caja de texto', ()=>{
-        const input = wrapper.find('input');
-        const value = 'hola mundo';
-        input.simulate('change', {
-            target:{
-                value: value
-            }
-        });
+    test('Debe de llamar setCategories si el input tiene un valor', () => {
+        const inputValue = 'Eren';
+        const setCategories = jest.fn();
+        render( <AddCategory setCategories={ setCategories }/> );
 
-        expect(wrapper.find('p').text().trim()).toBe(value);
-    })
+        const input = screen.getByRole('textbox');
+        const form = screen.getByRole('form');
 
-    test('No debe de postear la infomración on submit', ()=>{
-        wrapper.find('form').simulate('submit', {preventDefault(){}});
+        fireEvent.input( input, { target: { value: inputValue } } );
+        fireEvent.submit( form );
+        // screen.debug();
 
-        expect( setCategories ).not.toHaveBeenCalled();
-    })
+        expect( input.value ).toBe('');
 
-    test('Deben de llamar el setCategories y limpiar la caja de texto', ()=>{
-        const value = 'hola mundo';
-        wrapper.find('input').simulate('change', { target: {value}});
-
-        wrapper.find('form').simulate('submit', {preventDefault(){}});
         expect( setCategories ).toHaveBeenCalled();
-        expect( setCategories ).toHaveBeenCalledWith( expect.any(Function));
-        //expect(wrapper.find('input').text()).toBe('');
-        expect(wrapper.find('input').prop('value')).toBe('');
-    })
-})
+        expect( setCategories ).toHaveBeenCalledTimes(1);
+        // expect( setCategories ).toHaveBeenCalledWith( inputValue );
+    });
+
+    // test('No debe de llamar el setCategories si el input está vacío', () => {
+
+    //     const setCategories = jest.fn();
+    //     render( <AddCategory setCategories={ setCategories }/> );
+
+    //     const form = screen.getByRole('form');
+    //     fireEvent.submit( form );
+
+    //     expect( setCategories ).toHaveBeenCalled(0);
+    //     expect( setCategories ).not.toHaveBeenCalled();
+    // });
+});

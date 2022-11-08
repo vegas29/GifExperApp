@@ -1,39 +1,43 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import GifGrid from '../../components/GifGrid';
-import { useFetchGifs } from '../../hooks/useFetchGifs';
+/* eslint-disable jest/valid-expect */
+/* eslint-disable testing-library/no-debugging-utils */
+import { render, screen } from "@testing-library/react";
+import { GifGrid } from "../../components/GifGrid";
+import { useFetchGifs } from "../../hooks/useFetchGifs";
+
 jest.mock('../../hooks/useFetchGifs');
 
+describe('Probando el componente GifGrid', () => {
 
-describe('Probando el componente GifGrid', () =>{
-    const category = 'hola mundo';
-    test('Debe renderizar el componente correctamente', ()=>{
+    const category = 'Eren';
+
+    // test('Debe de mostrar el loading inicialmente', () => {
+    //     render( <GifGrid category={ category } />);
+    //     expect( screen.getByText('Cargando...'));
+    //     expect( screen.getByText( category ));
+    //     // screen.debug();
+    // });
+
+    test('Debe de mostrar items cuando se cargan las imgs mediante useFetchGifs', () => {
+
+        const gifs = [
+            {
+                id: 'ABC',
+                title: 'Eren',
+                url: 'https://localhost/eren.jpg'
+            },
+            {
+                id: 'CDA',
+                title: 'Armin',
+                url: 'https://localhost/armin.jpg'
+            },
+        ]
+
         useFetchGifs.mockReturnValue({
-            data: [],
-            loading:true
+            images: [],
+            isLOading: false
         });
 
-        const wrapper = shallow(<GifGrid category={category}/>);
-        expect(wrapper).toMatchSnapshot();
+        render( <GifGrid category={ category } />);
+        expect( screen.getAllByRole('img').length).toBe(2);
     });
-
-    test('Debe de mostrar items cuando se cargan imagenes useFetchGifs', ()=>{
-
-        const gifs = [{
-            id: 'ABC',
-            url: 'https://localhost/cualquiercosa/hola.jpg',
-            title: 'Cualquier cosa'
-        }]
-        useFetchGifs.mockReturnValue({
-            data: gifs,
-            loading: false
-        });
-        const wrapper = shallow(<GifGrid category={category}/>);
-
-        expect(wrapper).toMatchSnapshot();
-        expect(wrapper.find('p').exists()).toBe(false); 
-        expect(wrapper.find('GifGridItem').length).toBe(gifs.length)
-        
-
-    })
-})
+});

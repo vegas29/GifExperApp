@@ -1,35 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Prueba sobre el componente <GifExpertApp /> Debe de mostrar una lista de categorias 1`] = `
-<Fragment>
-  <h1
-    className="text-white font-bold text-3xl md:text-4xl text-center border-b-2 pb-5"
+exports[`Prueba sobre el componente <GifExpertApp /> Deberia coincidir el snapshot 1`] = `
+<div>
+  <div
+    class="container sm: mx-auto"
   >
-    GifExpertApp
-  </h1>
-  <AddCategory
-    setCategories={[Function]}
-  />
-  <GifGrid
-    category="One Punch"
-    key="One Punch"
-  />
-  <GifGrid
-    category="SNK"
-    key="SNK"
-  />
-</Fragment>
-`;
-
-exports[`Prueba sobre el componente <GifExpertApp /> Debe renderizar el componente 1`] = `
-<Fragment>
-  <h1
-    className="text-white font-bold text-3xl md:text-4xl text-center border-b-2 pb-5"
-  >
-    GifExpertApp
-  </h1>
-  <AddCategory
-    setCategories={[Function]}
-  />
-</Fragment>
+    <h1
+      class="text-white font-bold text-3xl md:text-4xl text-center border-b-2 pb-5"
+    >
+      GifExpertApp
+    </h1>
+    <form
+      aria-label="form"
+    >
+      <input
+        class="mt-5 rounded-xl bg-gray-100 focus:outline-none focus:border-2 focs:border-gray-200 py-2 px-5 text-xl"
+        placeholder="Digite el nombre del gif a buscar"
+        type="text"
+        value=""
+      />
+    </form>
+  </div>
+</div>
 `;
